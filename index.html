@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СДЭК · Коммерческие представители</title>
+    <meta name="description" content="Команда коммерческих представителей СДЭК. Контакты для связи на выставке InterCHARM 2026.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --green: #119C41;
+            --green-dark: #0E7A35;
+            --green-light: #E8F5ED;
+            --text: #1A2C2C;
+            --text-soft: #5A6E6E;
+            --border: #E2E8E6;
+            --bg: #EEF2F5;
+            --card-bg: #FFFFFF;
+        }
+
+        body {
+            background: var(--bg);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            padding: 1.5rem 1rem;
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+
+        .app {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        /* ===== Шапка ===== */
+        .header {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 1.8rem 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border-left: 6px solid var(--green);
+        }
+
+        .logo-block {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+            font-weight: 800;
+            font-size: 2rem;
+            letter-spacing: -1px;
+        }
+        .logo-block span { color: var(--green); }
+
+        .header-sub {
+            color: var(--text-soft);
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+            line-height: 1.4;
+        }
+
+        .header-right {
+            text-align: right;
+            font-size: 0.85rem;
+            color: var(--text-soft);
+            line-height: 1.5;
+        }
+        .header-right strong {
+            color: var(--text);
+            font-size: 1rem;
+            display: block;
+        }
+
+        /* ===== Основной заголовок ===== */
+        h1 {
+            font-size: 1.6rem;
+            margin: 1.8rem 0 0.2rem;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+        }
+        .subtitle {
+            color: var(--text-soft);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--green);
+            display: inline-block;
+            padding-bottom: 0.3rem;
+        }
+
+        /* ===== Карточки ===== */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .person-card {
+            background: var(--card-bg);
+            border-radius: 28px;
+            padding: 2rem 1.8rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .person-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+        }
+
+        .person-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--green), #44C767);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--green), #44C767);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.6rem;
+            letter-spacing: -1px;
+            flex-shrink: 0;
+            box-shadow: 0 6px 16px rgba(17,156,65,0.3);
+        }
+
+        .person-info h2 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            line-height: 1.2;
+        }
+
+        .person-info .position-ru {
+            font-size: 0.85rem;
+            color: var(--green);
+            font-weight: 600;
+            margin-top: 0.3rem;
+            line-height: 1.3;
+        }
+        .person-info .position-en {
+            font-size: 0.75rem;
+            color: var(--text-soft);
+            margin-top: 0.1rem;
+            line-height: 1.3;
+        }
+
+        /* ===== Контакты ===== */
+        .contacts-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.7rem 1rem;
+            border-radius: 14px;
+            background: #f8fafc;
+            transition: background 0.15s;
+            text-decoration: none;
+            color: var(--text);
+            font-size: 0.9rem;
+            border: 1px solid transparent;
+        }
+        .contact-row:hover {
+            background: var(--green-light);
+            border-color: var(--green);
+        }
+
+        .contact-row .icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            background: var(--green);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            flex-shrink: 0;
+        }
+
+        .contact-row .label {
+            font-size: 0.7rem;
+            color: var(--text-soft);
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            font-weight: 600;
+        }
+
+        .contact-row .value {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .contact-row .content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        /* ===== Мессенджеры ===== */
+        .messengers {
+            display: flex;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .messenger-btn {
+            flex: 1;
+            min-width: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 0.8rem 1rem;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: transform 0.15s, box-shadow 0.15s;
+            color: white;
+        }
+        .messenger-btn.tg {
+            background: linear-gradient(135deg, #29A9EB, #0088cc);
+        }
+        .messenger-btn.wc {
+            background: linear-gradient(135deg, #2DC100, #07C160);
+        }
+        .messenger-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+        }
+
+        .messenger-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* ===== Кнопка "Сохранить контакт" ===== */
+        .save-btn {
+            width: 100%;
+            padding: 0.9rem 1.5rem;
+            border: none;
+            border-radius: 16px;
+            background: var(--green);
+            color: white;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background 0.15s, transform 0.15s;
+            font-family: inherit;
+        }
+        .save-btn:hover {
+            background: var(--green-dark);
+            transform: translateY(-1px);
+        }
+
+        /* ===== QR-код страницы ===== */
+        .page-qr {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 1.8rem 2rem;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .qr-wrapper {
+            background: white;
+            padding: 12px;
+            border-radius: 16px;
+            border: 2px solid var(--green-light);
+        }
+
+        #pageQr {
+            display: block;
+            width: 140px;
+            height: 140px;
+        }
+        #pageQr img, #pageQr canvas {
+            display: block;
+        }
+
+        .qr-text {
+            max-width: 340px;
+        }
+        .qr-text h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .qr-text p {
+            font-size: 0.85rem;
+            color: var(--text-soft);
+            line-height: 1.5;
+        }
+
+        /* ===== Футер ===== */
+        .footer {
+            text-align: center;
+            padding: 2rem 1rem 1rem;
+            color: var(--text-soft);
+            font-size: 0.8rem;
+        }
+        .footer strong { color: var(--green); }
+
+        /* ===== Toast ===== */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--text);
+            color: white;
+            padding: 0.9rem 1.8rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ===== Мобильная адаптация ===== */
+        @media (max-width: 600px) {
+            body { padding: 1rem 0.8rem; }
+            .header { padding: 1.3rem; }
+            .header-right { text-align: left; }
+            .logo-block { font-size: 1.7rem; }
+            h1 { font-size: 1.35rem; }
+            .person-card { padding: 1.5rem 1.3rem; }
+            .avatar { width: 60px; height: 60px; font-size: 1.35rem; }
+            .person-info h2 { font-size: 1.15rem; }
+            .page-qr { padding: 1.3rem; }
+            #pageQr { width: 120px; height: 120px; }
+        }
+
+        /* ===== Печать в PDF ===== */
+        @media print {
+            body { background: white; padding: 0; }
+            .person-card, .header, .page-qr {
+                box-shadow: none;
+                border: 1px solid #ccc;
+                page-break-inside: avoid;
+            }
+            .save-btn, .messenger-btn, .page-qr { display: none; }
+            .contact-row { background: #f8f8f8 !important; }
+        }
+    </style>
+</head>
+<body>
+<div class="app">
+
+    <!-- ===== Шапка ===== -->
+    <header class="header">
+        <div>
+            <div class="logo-block">СДЭК<span>.</span></div>
+            <div class="header-sub">Команда коммерческих представителей<br>Commercial Representatives Team</div>
+        </div>
+        <div class="header-right">
+            <strong>InterCHARM 2026</strong>
+            Москва · 14–17 октября<br>
+            <span style="font-size:0.8rem;">Crocus Expo</span>
+        </div>
+    </header>
+
+    <!-- ===== Заголовок ===== -->
+    <h1>Свяжитесь с нами</h1>
+    <div class="subtitle">Get in touch · 联系方式</div>
+
+    <!-- ===== Команда ===== -->
+    <div class="team-grid">
+
+        <!-- ===== Карточка: Полтэф Герман ===== -->
+        <div class="person-card">
+            <div class="card-header">
+                <div class="avatar">ГП</div>
+                <div class="person-info">
+                    <h2>Полтэф Герман</h2>
+                    <div class="position-ru">Коммерческий представитель · Международные перевозки</div>
+                    <div class="position-en">Commercial Representative · International Shipping</div>
+                </div>
+            </div>
+
+            <div class="contacts-list">
+                <a href="tel:+79311056677" class="contact-row">
+                    <div class="icon">📞</div>
+                    <div class="content">
+                        <div class="label">Телефон · Phone</div>
+                        <div class="value">+7 (931) 105-66-77</div>
+                    </div>
+                </a>
+                <a href="tel:+79819539025" class="contact-row">
+                    <div class="icon">📱</div>
+                    <div class="content">
+                        <div class="label">Доп. телефон · Alt. phone</div>
+                        <div class="value">+7 (981) 953-90-25</div>
+                    </div>
+                </a>
+                <a href="mailto:g.poltef@cdek.ru" class="contact-row">
+                    <div class="icon">✉️</div>
+                    <div class="content">
+                        <div class="label">Email</div>
+                        <div class="value">g.poltef@cdek.ru</div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="messengers">
+                <a href="https://t.me/pluxstars" target="_blank" rel="noopener" class="messenger-btn tg">
+                    <svg viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+                    Telegram
+                </a>
+                <a href="#" class="messenger-btn wc" onclick="showWeChat(event)">
+                    <svg viewBox="0 0 24 24"><path d="M8.69 4C4.9 4 1.82 6.6 1.82 9.79c0 1.82 1.02 3.44 2.62 4.53l-.66 1.97 2.29-1.15c.81.22 1.68.35 2.58.35.24 0 .48-.01.71-.03a5.5 5.5 0 0 1-.27-1.7c0-3.13 3.04-5.66 6.79-5.66.25 0 .5.01.74.04C15.9 5.67 12.58 4 8.69 4zm-2.3 3.3a.86.86 0 1 1 0 1.72.86.86 0 0 1 0-1.72zm4.6 0a.86.86 0 1 1 0 1.72.86.86 0 0 1 0-1.72zM16.5 9.5c-3.03 0-5.5 2.04-5.5 4.56 0 2.51 2.47 4.56 5.5 4.56.65 0 1.27-.1 1.85-.27l1.85.93-.53-1.6c1.28-.87 2.1-2.16 2.1-3.62 0-2.52-2.47-4.56-5.27-4.56zm-1.85 2.53a.72.72 0 1 1 0 1.44.72.72 0 0 1 0-1.44zm3.7 0a.72.72 0 1 1 0 1.44.72.72 0 0 1 0-1.44z"/></svg>
+                    WeChat
+                </a>
+            </div>
+
+            <button class="save-btn" onclick="saveContact('poltef')">
+                📥 Сохранить контакт · Save contact
+            </button>
+        </div>
+
+        <!-- ===== Карточка: Горчаков Илья ===== -->
+        <div class="person-card">
+            <div class="card-header">
+                <div class="avatar">ГИ</div>
+                <div class="person-info">
+                    <h2>Горчаков Илья</h2>
+                    <div class="position-ru">Коммерческий представитель · Ключевые клиенты</div>
+                    <div class="position-en">Commercial Representative · Key Accounts</div>
+                </div>
+            </div>
+
+            <div class="contacts-list">
+                <a href="tel:+79697928369" class="contact-row">
+                    <div class="icon">📞</div>
+                    <div class="content">
+                        <div class="label">Телефон · Phone</div>
+                        <div class="value">+7 (969) 792-83-69</div>
+                    </div>
+                </a>
+                <a href="tel:+79770998586" class="contact-row">
+                    <div class="icon">📱</div>
+                    <div class="content">
+                        <div class="label">Доп. телефон · Alt. phone</div>
+                        <div class="value">+7 (977) 099-85-86</div>
+                    </div>
+                </a>
+                <a href="mailto:i.gorchakov@cdek.ru" class="contact-row">
+                    <div class="icon">✉️</div>
+                    <div class="content">
+                        <div class="label">Email</div>
+                        <div class="value">i.gorchakov@cdek.ru</div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="messengers">
+                <a href="https://t.me/ormanjorman" target="_blank" rel="noopener" class="messenger-btn tg">
+                    <svg viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+                    Telegram
+                </a>
+                <a href="#" class="messenger-btn wc" onclick="showWeChat(event)">
+                    <svg viewBox="0 0 24 24"><path d="M8.69 4C4.9 4 1.82 6.6 1.82 9.79c0 1.82 1.02 3.44 2.62 4.53l-.66 1.97 2.29-1.15c.81.22 1.68.35 2.58.35.24 0 .48-.01.71-.03a5.5 5.5 0 0 1-.27-1.7c0-3.13 3.04-5.66 6.79-5.66.25 0 .5.01.74.04C15.9 5.67 12.58 4 8.69 4zm-2.3 3.3a.86.86 0 1 1 0 1.72.86.86 0 0 1 0-1.72zm4.6 0a.86.86 0 1 1 0 1.72.86.86 0 0 1 0-1.72zM16.5 9.5c-3.03 0-5.5 2.04-5.5 4.56 0 2.51 2.47 4.56 5.5 4.56.65 0 1.27-.1 1.85-.27l1.85.93-.53-1.6c1.28-.87 2.1-2.16 2.1-3.62 0-2.52-2.47-4.56-5.27-4.56zm-1.85 2.53a.72.72 0 1 1 0 1.44.72.72 0 0 1 0-1.44zm3.7 0a.72.72 0 1 1 0 1.44.72.72 0 0 1 0-1.44z"/></svg>
+                    WeChat
+                </a>
+            </div>
+
+            <button class="save-btn" onclick="saveContact('gorchakov')">
+                📥 Сохранить контакт · Save contact
+            </button>
+        </div>
+
+    </div>
+
+    <!-- ===== QR всей страницы ===== -->
+    <div class="page-qr">
+        <div class="qr-wrapper">
+            <div id="pageQr"></div>
+        </div>
+        <div class="qr-text">
+            <h3>Отсканируйте QR-код</h3>
+            <p>Чтобы открыть эту страницу на своём телефоне и сохранить контакты.<br>
+            <span style="color:var(--green);">Scan QR — open this page on your phone.</span></p>
+        </div>
+    </div>
+
+    <div class="footer">
+        © <strong>СДЭК</strong> · InterCHARM 2026 · Москва, 14–17 октября
+    </div>
+</div>
+
+<div class="toast" id="toast">Контакт сохранён</div>
+
+<script>
+    // ===== QR-код страницы =====
+    window.addEventListener('DOMContentLoaded', function() {
+        const url = window.location.href.split('#')[0];
+        new QRCode(document.getElementById('pageQr'), {
+            text: url,
+            width: 140,
+            height: 140,
+            colorDark: '#119C41',
+            colorLight: '#FFFFFF',
+            correctLevel: QRCode.CorrectLevel.H
+        });
+    });
+
+    // ===== Контакты для vCard =====
+    const contacts = {
+        poltef: {
+            firstName: 'Герман',
+            lastName: 'Полтэф',
+            org: 'СДЭК',
+            title: 'Коммерческий представитель · Международные перевозки',
+            phones: ['+7 931 105-66-77', '+7 981 953-90-25'],
+            email: 'g.poltef@cdek.ru',
+            telegram: 'https://t.me/pluxstars'
+        },
+        gorchakov: {
+            firstName: 'Илья',
+            lastName: 'Горчаков',
+            org: 'СДЭК',
+            title: 'Коммерческий представитель · Ключевые клиенты',
+            phones: ['+7 969 792-83-69', '+7 977 099-85-86'],
+            email: 'i.gorchakov@cdek.ru',
+            telegram: 'https://t.me/ormanjorman'
+        }
+    };
+
+    // ===== Сохранение vCard =====
+    function saveContact(key) {
+        const c = contacts[key];
+        const vcard = `BEGIN:VCARD
+VERSION:3.0
+N:${c.lastName};${c.firstName};;;
+FN:${c.firstName} ${c.lastName}
+ORG:${c.org}
+TITLE:${c.title}
+TEL;TYPE=WORK,VOICE:${c.phones[0]}
+TEL;TYPE=CELL:${c.phones[1]}
+EMAIL;TYPE=WORK:${c.email}
+URL:${c.telegram}
+NOTE:Telegram: ${c.telegram}
+END:VCARD`;
+
+        const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${c.lastName}_${c.firstName}.vcf`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        showToast('Контакт сохранён · Contact saved');
+    }
+
+    // ===== WeChat (заглушка) =====
+    function showWeChat(e) {
+        e.preventDefault();
+        showToast('WeChat: покажите QR-код из галереи');
+    }
+
+    // ===== Toast =====
+    let toastTimeout;
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.classList.add('show');
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+            toast.classList.remove('show');
+        }, 2500);
+    }
+</script>
+
+</body>
+</html>
